@@ -1,24 +1,22 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import { Link, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import PageA from "./pages/PageA";
+import PageB from "./pages/PageB";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => (
+	<div className="app">
+		<h2>This the root view in Remote</h2>
+		<nav className="horizontal-nav">
+			<Link to="page-a">Remote/Page A</Link>
+			<Link to="page-b">Remote/Page B</Link>
+		</nav>
+		<Routes>
+			<Route index element={<Home />} />
+			<Route path="page-a" element={<PageA />} />
+			<Route path="page-b" element={<PageB />} />
+		</Routes>
+	</div>
+);
 
 export default App;
