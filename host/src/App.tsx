@@ -1,12 +1,20 @@
 import { Suspense, lazy } from "react";
 import { Link, Routes, Route } from "react-router-dom";
+import { importRemote } from "module-federation-import-remote";
 import Home from "./pages/Home";
 import PageA from "./pages/PageA";
 import PageB from "./pages/PageB";
 import NotFound from "./pages/NotFound";
 import styles from "./App.module.scss";
 
-const RemoteApp = lazy(() => import("remote/RemoteApp"));
+const RemoteApp = lazy(() =>
+	importRemote({
+		url: "http://localhost:3001",
+		scope: "RemoteApp",
+		module: "RemoteApp",
+		remoteEntryFileName: "js/remote-app-entry.js",
+	})
+);
 
 const App = () => (
 	<div className={styles.app}>
@@ -17,7 +25,7 @@ const App = () => (
 			<Link to="/page-b">Host/Page B</Link>
 			<Link to="/remote">Remote</Link>
 		</nav>
-		<Suspense fallback="Loading">
+		<Suspense fallback="Loading...">
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/page-a" element={<PageA />} />
