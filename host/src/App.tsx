@@ -7,13 +7,18 @@ import PageB from "./pages/PageB";
 import NotFound from "./pages/NotFound";
 import styles from "./App.module.scss";
 
-const RemoteApp = lazy(() =>
-  importRemote({
-    url: "http://localhost:3001",
-    scope: "RemoteApp",
-    module: "RemoteApp",
-    remoteEntryFileName: "js/remote-app-entry.js",
-  }),
+const RemoteApp = lazy(
+  () =>
+    importRemote({
+      url: "http://localhost:3001",
+      scope: "RemoteApp",
+      module: "RemoteApp",
+      remoteEntryFileName: "js/remote-app-entry.js",
+    }).catch(() => ({
+      default: () => (
+        <div>An error has occured... Please refresh the page.</div>
+      ),
+    })) as any,
 );
 
 const App = () => (
