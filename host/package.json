@@ -30,7 +30,8 @@
   },
   "scripts": {
     "start": "webpack serve",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "format": "prettier --write ."
   },
   "eslintConfig": {
     "extends": [
